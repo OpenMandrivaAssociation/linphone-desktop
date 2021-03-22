@@ -10,7 +10,7 @@ Patch1:		0001-Don-t-build-linphone-sdk.patch
 Patch2:		0002-Fix-building-out-of-git.patch
 Patch3:		0001-Further-fixes-for-building-out-of-git.patch
 BuildRequires:	bctoolbox-static-devel
-#BuildRequires:	git
+BuildRequires:	git
 BuildRequires:	cmake
 BuildRequires:	cmake(belcard)
 BuildRequires:	cmake(Linphone)
@@ -57,14 +57,11 @@ Linphone is a free VoIP and video softphone based on the SIP protocol.
 %prep
 %autosetup -p1 -n linphone-desktop-%{version}
 
-# Fix build
-#sed -i -e 's,LINPHONE_QT_GIT_VERSION,"%{version}",' linphone-app/src/config.h.cmake
-#echo '#define LINPHONE_QT_GIT_VERSION "%{version}"' >> linphone-app/src/config.h.cmake
-#echo "project(linphoneqt VERSION %{version})" > linphone-app/linphoneqt_version.cmake
-sed -i -e 's|set(APPLICATION_OUTPUT_DIR "${CMAKE_BINARY_DIR}/OUTPUT")|set(APPLICATION_OUTPUT_DIR "%{_prefix}")|' CMakeLists.txt
+%{_bindir}/git tag -a %{version} -m "%{version}"
 
 %build
 %cmake\
+	-DENABLE_BUILD_VERBOSE:BOOL=ON \
 	-DENABLE_UPDATE_CHECK:BOOL=OFF \
 	-DENABLE_NON_FREE_CODECS:BOOL=OFF \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
@@ -73,11 +70,11 @@ sed -i -e 's|set(APPLICATION_OUTPUT_DIR "${CMAKE_BINARY_DIR}/OUTPUT")|set(APPLIC
 	-G Ninja
 %ninja_build
 
+sed "/linphone-sdk/d" -i %{_vpath_builddir}/linphone-app/cmake_builder/linphone_package/cmake_install.cmake
+sed "s|$(pwd)/%{_vpath_builddir}/OUTPUT|%{_prefix}|" -i %{_vpath_builddir}/cmake_install.cmake
+
+
 %install
-# The upstream build system behaves weird if DESTDIR is set. Install manually.
-sed -i '/linphone-sdk/d' build/linphone-app/cmake_builder/linphone_package/cmake_install.cmake
-#sed -i "s|$(CURDIR)/build/OUTPUT|usr|" build/linphone-app/cmake_install.cmake
-#sed -i "s|$(CURDIR)/build/OUTPUT|usr|" build/cmake_install.cmake
 %ninja_install -C build
 
 rm -f %{buildroot}%{_bindir}/qt.conf
