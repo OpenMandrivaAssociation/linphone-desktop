@@ -9,6 +9,9 @@ Source0: 	https://gitlab.linphone.org/BC/public/linphone-desktop/-/archive/%{ver
 #Patch1:		0001-Don-t-build-linphone-sdk.patch
 #Patch2:		0002-Fix-building-out-of-git.patch
 #Patch3:		0001-Further-fixes-for-building-out-of-git.patch
+
+Patch4:		linphoneqt-fix-no-git.patch
+
 BuildRequires:	bctoolbox-static-devel
 BuildRequires:	git
 BuildRequires:	cmake
