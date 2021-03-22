@@ -13,7 +13,7 @@ Source0: 	https://gitlab.linphone.org/BC/public/linphone-desktop/-/archive/%{ver
 Patch4:		linphoneqt-fix-no-git.patch
 
 BuildRequires:	bctoolbox-static-devel
-BuildRequires:	git
+#BuildRequires:	git
 BuildRequires:	cmake
 BuildRequires:	cmake(belcard)
 BuildRequires:	cmake(Linphone)
