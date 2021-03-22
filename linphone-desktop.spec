@@ -70,6 +70,9 @@ mkdir -p build/linphone-sdk/desktop/{bin,share}
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_INSTALL_RPATH:BOOL=OFF \
 	-DENABLE_NON_FREE_CODECS:BOOL=OFF \
+	-DLINPHONE_OUTPUT_DIR="$PWD" \
+  	-DENABLE_STRICT=OFF       \
+  	-DENABLE_STATIC=OFF	\
 	-G Ninja
 %ninja_build
 
