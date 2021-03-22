@@ -57,8 +57,6 @@ Linphone is a free VoIP and video softphone based on the SIP protocol.
 %prep
 %autosetup -p1 -n linphone-desktop-%{version}
 
-%{_bindir}/git tag -a %{version} -m "%{version}"
-
 %build
 %cmake\
 	-DENABLE_BUILD_VERBOSE:BOOL=ON \
