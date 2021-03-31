@@ -5,12 +5,13 @@ Summary:	Voice over IP Application
 License:	GPLv2+
 Group:		Communications
 URL:		http://www.linphone.org
-Source0: 	https://gitlab.linphone.org/BC/public/linphone-desktop/-/archive/%{version}/linphone-desktop-%{version}.tar.bz2
+#Source0: 	https://gitlab.linphone.org/BC/public/linphone-desktop/-/archive/%{version}/linphone-desktop-%{version}.tar.bz2
+Source0:	%{name}.tar.gz
 #Patch1:		0001-Don-t-build-linphone-sdk.patch
 #Patch2:		0002-Fix-building-out-of-git.patch
 #Patch3:		0001-Further-fixes-for-building-out-of-git.patch
 
-Patch4:		linphoneqt-fix-no-git.patch
+#Patch4:		linphoneqt-fix-no-git.patch
 
 BuildRequires:	bctoolbox-static-devel
 #BuildRequires:	git
@@ -58,9 +59,9 @@ Linphone is a free VoIP and video softphone based on the SIP protocol.
 #--------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n linphone-desktop-%{version}
-touch linphone-sdk/CMakeLists.txt
-mkdir -p build/linphone-sdk/desktop/{bin,share}
+%autosetup -p1 -n linphone-desktop
+#touch linphone-sdk/CMakeLists.txt
+#mkdir -p build/linphone-sdk/desktop/{bin,share}
 
 %build
 %cmake\
@@ -76,8 +77,8 @@ mkdir -p build/linphone-sdk/desktop/{bin,share}
 	-G Ninja
 %ninja_build
 
-sed "/linphone-sdk/d" -i %{_vpath_builddir}/linphone-app/cmake_builder/linphone_package/cmake_install.cmake
-sed "s|$(pwd)/%{_vpath_builddir}/OUTPUT|%{_prefix}|" -i %{_vpath_builddir}/cmake_install.cmake
+#sed "/linphone-sdk/d" -i %{_vpath_builddir}/linphone-app/cmake_builder/linphone_package/cmake_install.cmake
+#sed "s|$(pwd)/%{_vpath_builddir}/OUTPUT|%{_prefix}|" -i %{_vpath_builddir}/cmake_install.cmake
 
 
 %install
