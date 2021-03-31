@@ -6,7 +6,7 @@ License:	GPLv2+
 Group:		Communications
 URL:		http://www.linphone.org
 #Source0: 	https://gitlab.linphone.org/BC/public/linphone-desktop/-/archive/%{version}/linphone-desktop-%{version}.tar.bz2
-Source0:	%{name}.tar.gz
+Source0:	%{name}.tar.xz
 #Patch1:		0001-Don-t-build-linphone-sdk.patch
 #Patch2:		0002-Fix-building-out-of-git.patch
 #Patch3:		0001-Further-fixes-for-building-out-of-git.patch
