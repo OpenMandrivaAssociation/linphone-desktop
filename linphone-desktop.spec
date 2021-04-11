@@ -12,6 +12,7 @@ Patch0:		0001-do-not-build-linphone-sdk.patch
 Patch1:		0002-remove-bc_compute_full_version-usage.patch
 BuildRequires:	bctoolbox-static-devel
 BuildRequires:	cmake
+BuildRequires:	pkgconfig(belr)
 BuildRequires:	cmake(belcard)
 BuildRequires:	cmake(Linphone)
 BuildRequires:	cmake(Qt5)
