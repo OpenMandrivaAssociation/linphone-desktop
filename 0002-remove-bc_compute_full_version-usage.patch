@@ -1,17 +1,6 @@
-From 6fc23da651d54979e73776fcda38614e290d65dc Mon Sep 17 00:00:00 2001
-From: David P <megver83@parabola.nu>
-Date: Fri, 23 Oct 2020 16:44:17 -0300
-Subject: [PATCH 2/2] remove bc_compute_full_version usage
-
----
- linphone-app/CMakeLists.txt                           | 11 +----------
- linphone-app/build/CMakeLists.txt                     |  5 -----
- .../cmake_builder/linphone_package/CMakeLists.txt     | 10 +---------
- 3 files changed, 2 insertions(+), 24 deletions(-)
-
 --- a/linphone-app/CMakeLists.txt
 +++ b/linphone-app/CMakeLists.txt
-@@ -21,17 +21,8 @@
+@@ -21,18 +21,8 @@
  ################################################################################
  cmake_minimum_required(VERSION 3.1)
  
@@ -27,26 +16,31 @@ Subject: [PATCH 2/2] remove bc_compute_full_version usage
 -bc_parse_full_version("${FULL_VERSION}" version_major version_minor version_patch identifiers metadata)
 -
 -project(linphoneqt VERSION "${version_major}.${version_minor}.${version_patch}")
+-
  
  if(ENABLE_BUILD_VERBOSE)
  	#message("CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}")
 --- a/linphone-app/build/CMakeLists.txt
 +++ b/linphone-app/build/CMakeLists.txt
-@@ -46,11 +46,6 @@
+@@ -46,7 +46,6 @@
    "libmng.spec"
  )
  
 -bc_compute_full_version(PROJECT_VERSION_BUILD)
--if(PROJECT_VERSION_BUILD)
--  set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${PROJECT_VERSION_BUILD}")
--endif()
--
- message("-- Package file name is ${CPACK_PACKAGE_FILE_NAME}")
- 
- set(CPACK_SOURCE_PACKAGE_FILE_NAME ${CPACK_PACKAGE_FILE_NAME})
+ if(PROJECT_VERSION_BUILD)
+   set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${PROJECT_VERSION_BUILD}")
+ endif()
 --- a/linphone-app/cmake_builder/linphone_package/CMakeLists.txt
 +++ b/linphone-app/cmake_builder/linphone_package/CMakeLists.txt
-@@ -38,15 +38,7 @@
+@@ -22,6 +22,7 @@
+ 
+ cmake_minimum_required(VERSION 3.1)
+ project(LINPHONE_PACKAGE) # Dummy project.
++include(linphoneapp_version.cmake)
+ if(ENABLE_BUILD_VERBOSE)
+ 	message("Linphone-packages paths : ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}")
+ endif()
+@@ -42,15 +42,7 @@
  # ==============================================================================
  # Build package version.
  # ==============================================================================
@@ -63,3 +57,4 @@ Subject: [PATCH 2/2] remove bc_compute_full_version usage
    set(APP_PROJECT_VERSION "0.0.0")
  endif ()
  string(REGEX REPLACE "([0-9.]+)-?.*" "\\1" LINPHONE_VERSION "${APP_PROJECT_VERSION}")
+
