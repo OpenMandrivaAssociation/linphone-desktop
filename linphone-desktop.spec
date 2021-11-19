@@ -1,5 +1,5 @@
 Name:		linphone-desktop
-Version:	4.3.0
+Version:	4.3.2
 Release:	1
 Summary:	Voice over IP Application
 License:	GPLv2+
@@ -7,7 +7,7 @@ Group:		Communications
 URL:		http://www.linphone.org
 Source0: 	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.gz	
 # (debian)
-Patch0:		0001-do-not-build-linphone-sdk.patch
+#Patch0:		0001-do-not-build-linphone-sdk.patch
 # (debian)
 Patch1:		0002-remove-bc_compute_full_version-usage.patch
 
@@ -68,8 +68,12 @@ echo "project(linphoneqt VERSION %{version})" > linphone-app/linphoneqt_version.
 echo "set (APP_PROJECT_VERSION %{version})" > linphone-app/cmake_builder/linphone_package/linphoneapp_version.cmake
 #sed -i -e 's|set(APPLICATION_OUTPUT_DIR "${CMAKE_BINARY_DIR}/OUTPUT")|set(APPLICATION_OUTPUT_DIR "%{_prefix}")|' CMakeLists.txt
 
+# disable SDK
+sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
+
 %build
-%cmake\
+%cmake \
+	-DENABLE_STATIC:BOOL=NO \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
 	-DCMAKE_INSTALL_RPATH:BOOL=OFF \
@@ -77,7 +81,6 @@ echo "set (APP_PROJECT_VERSION %{version})" > linphone-app/cmake_builder/linphon
 	-DENABLE_NON_FREE_CODECS:BOOL=OFF \
 	-DENABLE_OPENH264:BOOL=OFF \
 	-DLINPHONE_QT_ONLY:BOOL=ON \
-	-DENABLE_BUILD_VERBOSE:BOOL=ON \
 	-G Ninja
 %ninja_build
 
