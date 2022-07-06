@@ -1,6 +1,6 @@
 Name:		linphone-desktop
-Version:	4.3.2
-Release:	2
+Version:	4.4.8
+Release:	1
 Summary:	Voice over IP Application
 License:	GPLv2+
 Group:		Communications
