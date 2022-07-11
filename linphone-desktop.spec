@@ -85,6 +85,7 @@ sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
 	-DENABLE_NON_FREE_CODECS:BOOL=OFF \
 	-DENABLE_OPENH264:BOOL=OFF \
 	-DLINPHONE_QT_ONLY:BOOL=ON \
+	-DENABLE_BUILD_VERBOSE:BOOL=ON \
 	-G Ninja
 %ninja_build
 
