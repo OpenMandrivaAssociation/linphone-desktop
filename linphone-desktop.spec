@@ -13,9 +13,13 @@ Patch1:		0002-remove-bc_compute_full_version-usage.patch
 
 BuildRequires:	bctoolbox-static-devel
 BuildRequires:	cmake
-BuildRequires:	cmake(Linphone)
 BuildRequires:	cmake(belcard)
 BuildRequires:	cmake(belr)
+BuildRequires:	cmake(bctoolbox)
+BuildRequires:	cmake(ortp)
+BuildRequires:	cmake(linphone)
+BuildRequires:	cmake(linphonecxx)
+BuildRequires:	cmake(mediastreamer2)
 BuildRequires:	cmake(Qt5)
 BuildRequires:	cmake(Qt5Concurrent)
 BuildRequires:	cmake(Qt5DBus)
