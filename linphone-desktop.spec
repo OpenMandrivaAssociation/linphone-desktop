@@ -1,5 +1,5 @@
 Name:		linphone-desktop
-Version:	4.4.8
+Version:	4.4.10
 Release:	1
 Summary:	Voice over IP Application
 License:	GPLv2+
@@ -76,6 +76,9 @@ echo "set (APP_PROJECT_VERSION %{version})" > linphone-app/cmake_builder/linphon
 sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
 
 %build
+alias 'git=%{_bindir}/true'
+alias
+git
 %cmake \
 	-DENABLE_STATIC:BOOL=NO \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
