@@ -1,6 +1,6 @@
 Name:		linphone-desktop
 Version:	4.4.10
-Release:	1
+Release:	2
 Summary:	Voice over IP Application
 License:	GPLv2+
 Group:		Communications
@@ -36,6 +36,7 @@ BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(bctoolbox)
 BuildRequires:	qmake5
 
+Requires:	belcard
 Requires:	mediastreamer
 Requires:	qt5-qtdeclarative
 Requires:	qt5-qtquickcontrols
