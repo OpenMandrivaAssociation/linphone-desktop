@@ -1,6 +1,6 @@
 Name:		linphone-desktop
-Version:	4.4.10
-Release:	2
+Version:	4.4.11
+Release:	1
 Summary:	Voice over IP Application
 License:	GPLv2+
 Group:		Communications
@@ -90,6 +90,8 @@ git
 	-DENABLE_OPENH264:BOOL=OFF \
 	-DLINPHONE_QT_ONLY:BOOL=ON \
 	-DENABLE_BUILD_VERBOSE:BOOL=ON \
+	-DENABLE_UPDATE_CHECK:BOOL=OFF \
+	-DENABLE_STRICT:BOOL=ON \
 	-G Ninja
 %ninja_build
 
