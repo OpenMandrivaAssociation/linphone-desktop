@@ -1,3 +1,9 @@
+%bcond_with	ffmpeg
+%bcond_with	ldap
+%bcond_with	static
+%bcond_without	strict
+%bcond_with	tests
+
 Name:		linphone-desktop
 Version:	4.4.11
 Release:	1
@@ -32,12 +38,14 @@ BuildRequires:	cmake(Qt5Test)
 BuildRequires:	cmake(Qt5TextToSpeech)
 BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:	ninja
-BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(bctoolbox)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(speech-dispatcher)
 BuildRequires:	qmake5
 
 Requires:	belcard
 Requires:	mediastreamer
+Requires:	speech-dispatcher
 Requires:	qt5-qtdeclarative
 Requires:	qt5-qtquickcontrols
 Requires:	qt5-qtquickcontrols2
@@ -78,21 +86,21 @@ sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
 
 %build
 alias 'git=%{_bindir}/true'
-alias
-git
 %cmake \
-	-DENABLE_STATIC:BOOL=NO \
-	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+	-DENABLE_STRICT:BOOL=%{?with_strict:ON}%{?!with_strict:OFF} \
+	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!without_static:OFF} \
 	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
 	-DCMAKE_INSTALL_RPATH:BOOL=OFF \
 	-DENABLE_UPDATE_CHECK:BOOL=OFF \
 	-DENABLE_NON_FREE_CODECS:BOOL=OFF \
 	-DENABLE_OPENH264:BOOL=OFF \
 	-DLINPHONE_QT_ONLY:BOOL=ON \
-	-DENABLE_BUILD_VERBOSE:BOOL=ON \
-	-DENABLE_UPDATE_CHECK:BOOL=OFF \
-	-DENABLE_STRICT:BOOL=ON \
+	-DENABLE_VIDEO:BOOL=ON \
+	-DENABLE_FFMPEG:BOOL=%{?with_ffmpeg:ON}%{?!without_ffmpeg:OFF} \
+	-DENABLE_LDAP:BOOL=%{?with_ldap:ON}%{?!without_ldap:OFF} \
+	-DENABLE_BUILD_VERBOSE:BOOL=OFF \
 	-G Ninja
+
 %ninja_build
 
 %install
