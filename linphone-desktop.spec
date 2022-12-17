@@ -19,6 +19,7 @@ BuildRequires:	cmake
 BuildRequires:	cmake(belcard)
 BuildRequires:	cmake(belr)
 BuildRequires:	cmake(bctoolbox)
+BuildRequires:	cmake(jsoncpp)
 BuildRequires:	cmake(ortp)
 BuildRequires:	cmake(linphone)
 BuildRequires:	cmake(linphonecxx)
