@@ -79,7 +79,10 @@ Linphone is a free VoIP and video softphone based on the SIP protocol.
 #sed -i -e 's|set(APPLICATION_OUTPUT_DIR "${CMAKE_BINARY_DIR}/OUTPUT")|set(APPLICATION_OUTPUT_DIR "%{_prefix}")|' CMakeLists.txt
 
 # fix build (patch1)
-sed -i -e 's|@FULLVERSION@|%{version}|' linphone-app/CMakeLists.txt linphone-app/cmake_builder/linphone_package/CMakeLists.txt
+sed -i -e 's|@FULLVERSION@|%{version}|' \
+	linphone-app/CMakeLists.txt \
+	linphone-app/cmake_builder/linphone_package/CMakeLists.txt \
+	linphone-app/build/CMakeLists.txt
 
 # disable SDK
 sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
