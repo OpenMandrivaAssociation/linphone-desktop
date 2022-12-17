@@ -5,17 +5,14 @@
 %bcond_with	tests
 
 Name:		linphone-desktop
-Version:	4.4.11
+Version:	5.0.2
 Release:	1
 Summary:	Voice over IP Application
-License:	GPLv2+
+License:	GPLv3+
 Group:		Communications
-URL:		http://www.linphone.org
+URL:		https://www.linphone.org
 Source0: 	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.gz	
-# (debian)
-#Patch0:		0001-do-not-build-linphone-sdk.patch
-# (debian)
-Patch1:		0002-remove-bc_compute_full_version-usage.patch
+Patch1:		linphone-desktop-5.0.2-cmake-dont-use-git.patch
 
 BuildRequires:	bctoolbox-static-devel
 BuildRequires:	cmake
@@ -76,10 +73,13 @@ Linphone is a free VoIP and video softphone based on the SIP protocol.
 
 # Fix build
 #sed -i -e 's,LINPHONE_QT_GIT_VERSION,"%{version}",' linphone-app/src/config.h.cmake
-echo '#define LINPHONE_QT_GIT_VERSION "%{version}"' >> linphone-app/src/config.h.cmake
-echo "project(linphoneqt VERSION %{version})" > linphone-app/linphoneqt_version.cmake
-echo "set (APP_PROJECT_VERSION %{version})" > linphone-app/cmake_builder/linphone_package/linphoneapp_version.cmake
+##echo '#define LINPHONE_QT_GIT_VERSION "%{version}"' >> linphone-app/src/config.h.cmake
+##echo "project(linphoneqt VERSION %{version})" > linphone-app/linphoneqt_version.cmake
+##echo "set (APP_PROJECT_VERSION %{version})" > linphone-app/cmake_builder/linphone_package/linphoneapp_version.cmake
 #sed -i -e 's|set(APPLICATION_OUTPUT_DIR "${CMAKE_BINARY_DIR}/OUTPUT")|set(APPLICATION_OUTPUT_DIR "%{_prefix}")|' CMakeLists.txt
+
+# fix build (patch1)
+sed -i -e 's|@FULLVERSION@|%{version}|' linphone-app/CMakeLists.txt linphone-app/cmake_builder/linphone_package/CMakeLists.txt
 
 # disable SDK
 sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
@@ -87,8 +87,8 @@ sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
 %build
 alias 'git=%{_bindir}/true'
 %cmake \
+	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
 	-DENABLE_STRICT:BOOL=%{?with_strict:ON}%{?!with_strict:OFF} \
-	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!without_static:OFF} \
 	-DCMAKE_INSTALL_PREFIX:PATH=%{_prefix} \
 	-DCMAKE_INSTALL_RPATH:BOOL=OFF \
 	-DENABLE_UPDATE_CHECK:BOOL=OFF \
