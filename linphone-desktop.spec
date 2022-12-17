@@ -12,7 +12,7 @@ License:	GPLv3+
 Group:		Communications
 URL:		https://www.linphone.org
 Source0: 	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.gz	
-Patch1:		linphone-desktop-5.0.2-cmake-dont-use-git.patch
+Patch0:		linphone-desktop-5.0.2-cmake-dont-use-git.patch
 
 BuildRequires:	bctoolbox-static-devel
 BuildRequires:	cmake
@@ -72,14 +72,7 @@ Linphone is a free VoIP and video softphone based on the SIP protocol.
 %prep
 %autosetup -p1
 
-# Fix build
-#sed -i -e 's,LINPHONE_QT_GIT_VERSION,"%{version}",' linphone-app/src/config.h.cmake
-##echo '#define LINPHONE_QT_GIT_VERSION "%{version}"' >> linphone-app/src/config.h.cmake
-##echo "project(linphoneqt VERSION %{version})" > linphone-app/linphoneqt_version.cmake
-##echo "set (APP_PROJECT_VERSION %{version})" > linphone-app/cmake_builder/linphone_package/linphoneapp_version.cmake
-#sed -i -e 's|set(APPLICATION_OUTPUT_DIR "${CMAKE_BINARY_DIR}/OUTPUT")|set(APPLICATION_OUTPUT_DIR "%{_prefix}")|' CMakeLists.txt
-
-# fix build (patch1)
+# fix build (patch0)
 sed -i -e 's|@FULLVERSION@|%{version}|' \
 	linphone-app/CMakeLists.txt \
 	linphone-app/cmake_builder/linphone_package/CMakeLists.txt \
