@@ -5,7 +5,7 @@
 %bcond_with	tests
 
 Name:		linphone-desktop
-Version:	5.0.10
+Version:	5.0.14
 Release:	1
 Summary:	Voice over IP Application
 License:	GPLv3+
