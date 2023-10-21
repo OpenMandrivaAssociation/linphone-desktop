@@ -12,7 +12,7 @@ License:	GPLv3+
 Group:		Communications
 URL:		https://www.linphone.org
 Source0: 	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.gz	
-Patch0:		linphone-desktop-5.0.2-cmake-dont-use-git.patch
+Patch0:		linphone-desktop-5.1.2-cmake-dont-use-git.patch
 
 BuildRequires:	bctoolbox-static-devel
 BuildRequires:	cmake
