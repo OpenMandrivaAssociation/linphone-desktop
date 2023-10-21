@@ -30,8 +30,11 @@ BuildRequires:	cmake(Qt5DBus)
 BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Keychain)
 BuildRequires:	cmake(Qt5LinguistTools)
+BuildRequires:	cmake(Qt5Multimedia)
+BuildRequires:	cmake(Qt5Network)
 BuildRequires:	cmake(Qt5Pdf)
 BuildRequires:	cmake(Qt5PdfWidgets)
+BuildRequires:	cmake(Qt5Qml)
 BuildRequires:	cmake(Qt5Quick)
 BuildRequires:	cmake(Qt5QuickControls2)
 BuildRequires:	cmake(Qt5Svg)
@@ -48,9 +51,10 @@ Requires:	belcard
 Requires:	mediastreamer
 Requires:	speech-dispatcher
 Requires:	qt5-qtdeclarative
+Requires:	qt5-qtgraphicaleffects
 Requires:	qt5-qtquickcontrols
 Requires:	qt5-qtquickcontrols2
-Requires:	qt5-qtgraphicaleffects
+Requires:	qt5-qtmultimedia
 
 Provides:	linphone = %{version}-%{release}
 Obsoletes:	linphone < 4.1.1
