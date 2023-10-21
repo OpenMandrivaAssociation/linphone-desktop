@@ -28,7 +28,10 @@ BuildRequires:	cmake(Qt5)
 BuildRequires:	cmake(Qt5Concurrent)
 BuildRequires:	cmake(Qt5DBus)
 BuildRequires:	cmake(Qt5Gui)
+BuildRequires:	cmake(Qt5Keychain)
 BuildRequires:	cmake(Qt5LinguistTools)
+BuildRequires:	cmake(Qt5Pdf)
+BuildRequires:	cmake(Qt5PdfWidgets)
 BuildRequires:	cmake(Qt5Quick)
 BuildRequires:	cmake(Qt5QuickControls2)
 BuildRequires:	cmake(Qt5Svg)
@@ -92,6 +95,7 @@ alias 'git=%{_bindir}/true'
 	-DENABLE_NON_FREE_CODECS:BOOL=OFF \
 	-DENABLE_OPENH264:BOOL=OFF \
 	-DLINPHONE_QT_ONLY:BOOL=ON \
+	-DENABLE_QT_KEYCHAIN:BOOL=OFF \
 	-DENABLE_VIDEO:BOOL=ON \
 	-DENABLE_FFMPEG:BOOL=%{?with_ffmpeg:ON}%{?!without_ffmpeg:OFF} \
 	-DENABLE_LDAP:BOOL=%{?with_ldap:ON}%{?!without_ldap:OFF} \
