@@ -1,0 +1,10 @@
+--- a/linphone-app/build/CMakeLists.txt
++++ b/linphone-app/build/CMakeLists.txt
+@@ -56,6 +56,6 @@ message("-- Package file name is ${CPACK
+ 
+ set(CPACK_SOURCE_PACKAGE_FILE_NAME ${CPACK_PACKAGE_FILE_NAME})
+ 
+-bc_generate_rpm_specfile("rpm/linphone.spec.cmake" "${PROJECT_SOURCE_DIR}/linphone.spec")
++#bc_generate_rpm_specfile("rpm/linphone.spec.cmake" "${PROJECT_SOURCE_DIR}/linphone.spec")
+ 
+ include(CPack)

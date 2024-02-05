@@ -1,0 +1,87 @@
+--- a/linphone-app/CMakeLists.txt
++++ b/linphone-app/CMakeLists.txt
+@@ -32,15 +32,13 @@ find_package(BCToolbox)
+ if(NOT BCToolbox_FOUND)
+ 	find_package(bctoolbox CONFIG REQUIRED)
+ endif()
+-if(NOT LINPHONEAPP_VERSION)
+-	bc_compute_full_version(LINPHONEAPP_VERSION)
+-endif()
+-set(version_major)
+-set(version_minor)
+-set(version_patch)
++set(LINPHONEAPP_VERSION "@LINPHONEAPP_VERSION@")
++set(version_major "5")
++set(version_minor "2")
++set(version_patch "0")
+ set(identifiers )
+ set(metadata )
+-bc_parse_full_version("${LINPHONEAPP_VERSION}" version_major version_minor version_patch identifiers metadata)
++#bc_parse_full_version("${LINPHONEAPP_VERSION}" version_major version_minor version_patch identifiers metadata)
+ 
+ 
+ project(linphoneqt VERSION "${version_major}.${version_minor}.${version_patch}")
+@@ -137,6 +137,12 @@
+ 
+ # Still needed?
+ #bc_git_version(${TARGET_NAME} ${PROJECT_VERSION})
++add_custom_target(${TARGET_NAME}-git-version
++			WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
++			COMMAND echo "#define MS2_GIT_VERSION \"0000000\"" > "gitversion.h"
++			BYPRODUCTS "gitversion.h"
++			VERBATIM
++		)
+ 
+ #-------------------------------------------------
+ set(ASSETS_DIR "assets")
+--- a/linphone-app/cmake_builder/linphone_package/CMakeLists.txt
++++ b/linphone-app/cmake_builder/linphone_package/CMakeLists.txt
+@@ -27,7 +27,7 @@
+ endif()
+ include("${CMAKE_CURRENT_SOURCE_DIR}/../../application_info.cmake")
+ 
+-find_package(Git)
++#find_package(Git)
+ #Policy set to allow link from other directory (cmake 3.13)
+ if (POLICY CMP0079)
+   cmake_policy(SET CMP0079 NEW)
+@@ -39,6 +39,7 @@
+ # Build package version.
+ # ==============================================================================
+ 
++#set((LINPHONEAPP_VERSION "@LINPHONEAPP_VERSION@")
+ if (GIT_EXECUTABLE AND NOT(LINPHONEAPP_VERSION))
+   execute_process(
+     COMMAND ${GIT_EXECUTABLE} describe --always
+--- a/linphone-app/build/CMakeLists.txt
++++ b/linphone-app/build/CMakeLists.txt
+@@ -46,7 +46,8 @@
+   "libmng.spec"
+ )
+ 
+-bc_compute_full_version(PROJECT_VERSION_BUILD)
++set(PROJECT_VERSION_BUILD "@LINPHONEAPP_VERSION@")
++#bc_compute_full_version(PROJECT_VERSION_BUILD)
+ if(PROJECT_VERSION_BUILD)
+   set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${PROJECT_VERSION_BUILD}")
+ endif()
+--- a/linphone-app/cmake_builder/linphone_package/CMakeLists.txt
++++ b/linphone-app/cmake_builder/linphone_package/CMakeLists.txt
+@@ -52,11 +52,12 @@ elseif (NOT(LINPHONEAPP_VERSION))
+   set(LINPHONEAPP_VERSION "0.0.0")
+ endif ()
+ 
+-set(LINPHONE_MAJOR_VERSION)
+-set(LINPHONE_MINOR_VERSION)
+-set(LINPHONE_MICRO_VERSION)
+-set(LINPHONE_BRANCH_VERSION)
+-bc_parse_full_version(${LINPHONEAPP_VERSION} LINPHONE_MAJOR_VERSION LINPHONE_MINOR_VERSION LINPHONE_MICRO_VERSION LINPHONE_BRANCH_VERSION)
++set(LINPHONEAPP_VERSION "@LINPHONEAPP_VERSION@")
++set(LINPHONE_MAJOR_VERSION "6")
++set(LINPHONE_MINOR_VERSION "2")
++set(LINPHONE_MICRO_VERSION "0")
++set(LINPHONE_BRANCH_VERSION "0")
++#bc_parse_full_version(${LINPHONEAPP_VERSION} LINPHONE_MAJOR_VERSION LINPHONE_MINOR_VERSION LINPHONE_MICRO_VERSION LINPHONE_BRANCH_VERSION)
+ 
+ set(LINPHONE_VERSION ${LINPHONE_MAJOR_VERSION}.${LINPHONE_MINOR_VERSION}.${LINPHONE_MICRO_VERSION})
+ #string(REGEX REPLACE "([0-9.]+)-?.*" "\\1" LINPHONE_VERSION "${LINPHONEAPP_VERSION}")

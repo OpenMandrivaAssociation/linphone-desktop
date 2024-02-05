@@ -1,0 +1,24 @@
+--- a/linphone-app/src/app/paths/Paths.cpp
++++ b/linphone-app/src/app/paths/Paths.cpp
+@@ -163,7 +163,7 @@ static inline QString getAppFactoryConfigFilePath () {
+ }
+ 
+ static inline QString getAppRootCaFilePath () {
+-	QString rootca = getAppPackageDataDirPath() + Constants::PathRootCa;
++	QString rootca = Constants::PathRootCa;
+ 	if(Paths::filePathExists(rootca.toStdString())){// Packaged
+ 		return rootca;
+ 	}
+diff --git a/linphone-app/src/utils/Constants.hpp b/linphone-app/src/utils/Constants.hpp
+index d79ea2b..be3b238 100644
+--- a/linphone-app/src/utils/Constants.hpp
++++ b/linphone-app/src/utils/Constants.hpp
+@@ -140,7 +140,7 @@ public:
+ 	static constexpr char PathConfig[] = "/linphonerc";
+ 	static constexpr char PathDatabase[] = "/linphone.db";
+ 	static constexpr char PathFactoryConfig[] = "/" EXECUTABLE_NAME "/linphonerc-factory";
+-	static constexpr char PathRootCa[] = "/linphone/rootca.pem";
++	static constexpr char PathRootCa[] = "/etc/pki/tls/cert.pem";
+ 	static constexpr char PathFriendsList[] = "/friends.db";
+ 	static constexpr char PathLimeDatabase[] = "/x3dh.c25519.sqlite3";
+ 	static constexpr char PathMessageHistoryList[] = "/message-history.db";

@@ -1,0 +1,137 @@
+--- a/linphone-app/CMakeLists.txt
++++ b/linphone-app/CMakeLists.txt
+@@ -30,7 +30,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_C
+ 
+ find_package(BCToolbox)
+ if(NOT BCToolbox_FOUND)
+-	find_package(bctoolbox CONFIG REQUIRED)
++	find_package(BCToolbox CONFIG REQUIRED)
+ endif()
+ set(LINPHONEAPP_VERSION "@LINPHONEAPP_VERSION@")
+ set(version_major "5")
+--- a/linphone-app/cmake/FindBCToolbox.cmake
++++ b/linphone-app/cmake/FindBCToolbox.cmake	
+@@ -30,18 +30,18 @@
+ #  BCToolbox_tester_TARGET - The name of the CMake target for the bctoolbox-tester library
+ 
+ 
+-if(NOT TARGET bctoolbox)
++if(NOT TARGET BCToolbox1)
+     set(EXPORT_PATH ${LINPHONE_OUTPUT_DIR})
+     include(GNUInstallDirs)
+-    set(BCToolbox_CMAKE_DIR ${EXPORT_PATH}/${CMAKE_INSTALL_DATADIR}/bctoolbox/cmake)
+-    include(${BCToolbox_CMAKE_DIR}/bctoolboxTargets.cmake)
++    set(BCToolbox_CMAKE_DIR /usr/${CMAKE_INSTALL_DATADIR}/cmake/BCToolbox)
++    include(${BCToolbox_CMAKE_DIR}/BCToolboxTargets.cmake)
+ endif()
+ 
+ set(_BCToolbox_REQUIRED_VARS BCToolbox_TARGET BCToolbox_CMAKE_DIR BCToolbox_CMAKE_UTILS)
+ set(_BCToolbox_CACHE_VARS ${_BCToolbox_REQUIRED_VARS})
+ 
+-if(TARGET bctoolbox)
+-	set(BCToolbox_TARGET bctoolbox)
++if(TARGET bctoolbox)
++	set(BCToolbox_TARGET bctoolbox)
+ 	get_target_property(_BCToolbox_SOURCE_DIR ${BCToolbox_TARGET} SOURCE_DIR)
+ 	set(BCToolbox_CMAKE_DIR "${_BCToolbox_SOURCE_DIR}/../cmake")
+ 	set(BCToolbox_CMAKE_UTILS "${BCToolbox_CMAKE_DIR}/BCToolboxCMakeUtils.cmake")
+--- a/linphone-app/cmake/FindBelcard.cmake
++++ b/linphone-app/cmake/FindBelcard.cmake
+@@ -26,7 +26,7 @@
+ if(NOT TARGET belcard)
+     set(EXPORT_PATH ${LINPHONE_OUTPUT_DIR})
+     include(GNUInstallDirs)
+-    include(${EXPORT_PATH}/${CMAKE_INSTALL_DATADIR}/Belcard/cmake/BelcardTargets.cmake)
++    include(/usr/${CMAKE_INSTALL_DATADIR}/cmake/BelCard/BelCardTargets.cmake)
+ endif()
+ 
+ set(_Belcard_REQUIRED_VARS Belcard_TARGET)
+--- a/linphone-app/cmake/FindLibLinphone.cmake
++++ b/linphone-app/cmake/FindLibLinphone.cmake
+@@ -27,7 +27,7 @@
+ if(NOT TARGET liblinphone)
+     set(EXPORT_PATH ${LINPHONE_OUTPUT_DIR})
+     include(GNUInstallDirs)
+-    include(${EXPORT_PATH}/${CMAKE_INSTALL_DATADIR}/linphone/cmake/linphoneTargets.cmake)
++    include(/usr/${CMAKE_INSTALL_DATADIR}/cmake/LibLinphone/LibLinphoneTargets.cmake)
+ endif()
+ 
+ set(_LibLinphone_REQUIRED_VARS LibLinphone_TARGET LibLinphone_PLUGINS_DIR)
+--- a/linphone-app/cmake/FindLinphoneCxx.cmake
++++ b/linphone-app/cmake/FindLinphoneCxx.cmake
+@@ -26,7 +26,7 @@
+ if(NOT TARGET liblinphone++)
+     set(EXPORT_PATH ${LINPHONE_OUTPUT_DIR})
+     include(GNUInstallDirs)
+-    include(${EXPORT_PATH}/${CMAKE_INSTALL_DATADIR}/LinphoneCxx/cmake/LinphoneCxxTargets.cmake)
++    include(/usr/${CMAKE_INSTALL_DATADIR}/cmake/LinphoneCxx/LinphoneCxxTargets.cmake)
+ endif()
+ 
+ set(_LinphoneCxx_REQUIRED_VARS LinphoneCxx_TARGET)
+--- a/linphone-app/cmake/FindMediastreamer2.cmake
++++ b/linphone-app/cmake/FindMediastreamer2.cmake
+@@ -29,7 +29,7 @@
+ if(NOT TARGET mediastreamer2)
+     set(EXPORT_PATH ${LINPHONE_OUTPUT_DIR})
+     include(GNUInstallDirs)
+-    include(${EXPORT_PATH}/${CMAKE_INSTALL_DATADIR}/Mediastreamer2/cmake/Mediastreamer2Targets.cmake)
++    include(/usr/${CMAKE_INSTALL_DATADIR}/cmake/Mediastreamer2/Mediastreamer2Targets.cmake)
+ endif()
+ 
+ set(_Mediastreamer2_REQUIRED_VARS Mediastreamer2_TARGET Mediastreamer2_PLUGINS_DIR)
+@@ -40,7 +40,7 @@
+ endif()
+ 
+ include(FindPackageHandleStandardArgs)
+-find_package_handle_standard_args(Mediastreamer2
++find_package_handle_standard_args(mediastreamer
+ 	REQUIRED_VARS ${_Mediastreamer2_REQUIRED_VARS}
+ 	HANDLE_COMPONENTS
+ )
+--- a/linphone-app/cmake_builder/linphone_package/sdk_content/bctoolbox.list.in
++++ b/linphone-app/cmake_builder/linphone_package/sdk_content/bctoolbox.list.in
+@@ -2,4 +2,4 @@
+ include/bctoolbox/*
+ lib/bctoolbox*.lib
+ lib/pkgconfig/bctoolbox*.pc
+-share/bctoolbox/cmake/*
++share/cmake/BCToolbox/*
+--- a/linphone-app/cmake_builder/linphone_package/sdk_content/bzrtp.list.in
++++ b/linphone-app/cmake_builder/linphone_package/sdk_content/bzrtp.list.in
+@@ -1,2 +1,2 @@
+ @LIBDIR@/@LIBPREFIX@bzrtp*.@LIBEXT@
+-share/bzrtp/cmake
++share/cmake/BZRTP
+--- a/linphone-app/cmake_builder/linphone_package/sdk_content/linphone.list.in
++++ b/linphone-app/cmake_builder/linphone_package/sdk_content/linphone.list.in
+@@ -2,5 +2,5 @@
+ include/linphone/*
+ lib/linphone*.lib
+ share/doc/linphone-*
+-share/Linphone/cmake/*
++share/LibLinphone/cmake/*
+ share/sounds/linphone/*
+--- a/linphone-app/cmake_builder/linphone_package/sdk_content/ms2plugins.list.in
++++ b/linphone-app/cmake_builder/linphone_package/sdk_content/ms2plugins.list.in
+@@ -1 +1 @@
+-lib/mediastreamer/plugins/*.@PLUGINEXT@
++@LIBDIR@/mediastreamer/plugins/*.@PLUGINEXT@
+--- a/linphone-app/cmake_builder/linphone_package/sdk_content/ortp.list.in
++++ b/linphone-app/cmake_builder/linphone_package/sdk_content/ortp.list.in
+@@ -3,4 +3,4 @@ include/ortp/*
+ lib/ortp*.lib
+ lib/pkgconfig/ortp.pc
+ share/doc/oRTP-*
+-share/oRTP/cmake/*
++share/cmake/Ortp/*
+--- a/linphone-app/cmake_builder/linphone_package/sdk_content/vcard.list.in
++++ b/linphone-app/cmake_builder/linphone_package/sdk_content/vcard.list.in
+@@ -2,5 +2,5 @@
+ @LIBDIR@/@LIBPREFIX@belcard*.@LIBEXT@
+ lib/belr*.lib
+ lib/belcard*.lib
+-share/Belr/cmake
+-share/Belcard/cmake
++share/cmake/Belr
++share/cmake/BelCard
+

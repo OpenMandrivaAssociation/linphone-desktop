@@ -1,0 +1,22 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -237,6 +237,7 @@ if(NOT APPLE OR MONO_ARCH)
+ 			elseif(UNIX)
+ 				set(CMAKE_INSTALL_RPATH "$ORIGIN:$ORIGIN/lib64:$ORIGIN/../lib64:$ORIGIN/lib:$ORIGIN/../lib")
+ 			endif()
++			add_subdirectory("external/ispell")
+ 			add_subdirectory("linphone-app")
+ 	endfunction()
+ 	add_linphone_app()
+--- a/linphone-app/cmake/FindISpell.cmake
++++ B/linphone-app/cmake/FindISpell.cmake
+@@ -29,7 +29,7 @@
+ if(NOT TARGET ${ISPELL_TARGET_NAME})
+     set(EXPORT_PATH ${ISPELL_OUTPUT_DIR})
+     include(GNUInstallDirs)
+-    include(${EXPORT_PATH}/${CMAKE_INSTALL_LIBDIR}/cmake/${ISPELL_TARGET_NAME}/${ISPELL_TARGET_NAME}Config.cmake)
++    include(${EXPORT_PATH}/../../external/ispell/CMakeLists.txt)
+ endif()
+ 
+ set(_ISpell_REQUIRED_VARS ISpell_TARGET)
+

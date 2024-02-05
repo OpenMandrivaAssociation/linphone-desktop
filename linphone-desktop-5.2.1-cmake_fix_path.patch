@@ -1,0 +1,49 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -54,7 +54,7 @@ else()
+ endif()
+ 
+ 
+-set(CMAKE_INSTALL_PREFIX "${APPLICATION_OUTPUT_DIR}")
++#set(CMAKE_INSTALL_PREFIX "${APPLICATION_OUTPUT_DIR}")
+ 
+ if( APPLE )
+ 	set(LINPHONESDK_BUILD_TYPE "Default")#Using Mac will remove all SDK targets.
+--- a/linphone-app/CMakeLists.txt
++++ b/linphone-app/CMakeLists.txt
+@@ -728,6 +730,7 @@ include_directories("${LINPHONE_OUTPUT_DIR}/include/OpenGL")
+ include_directories("${LINPHONE_OUTPUT_DIR}/include/")
+ include_directories("${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/")
+ include_directories("${QTKEYCHAIN_OUTPUT_DIR}/include/")
++include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include/")
+ if(NOT APPLE AND NOT WIN32)
+ 	include_directories("${ISpell_BINARY_DIR}/include")
+ endif ()
+@@ -837,20 +840,20 @@ add_dependencies(${APP_LIBRARY} update_translations ${APP_PLUGIN})
+ set(TOOLS_DIR "${CMAKE_BINARY_DIR}/programs")
+ set(LINPHONE_BUILDER_SIGNING_IDENTITY ${LINPHONE_BUILDER_SIGNING_IDENTITY})
+ 
+-add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/")
+-add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/include/" "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/")
+-add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${APP_PLUGIN}> "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/")
+-add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_FILE:${APP_PLUGIN}> "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/")
++#add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/")
++#add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/include/" "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/")
++#add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${APP_PLUGIN}> "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/")
++#add_custom_command(TARGET ${APP_PLUGIN} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_FILE:${APP_PLUGIN}> "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/")
+ #add_custom_command(TARGET ${TARGET_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/include/LinphoneApp/*" "${CMAKE_INSTALL_PREFIX}/include/LinphoneApp/")
+ 
+ #configure_file("${CMAKE_CURRENT_SOURCE_DIR}/include/*" "${CMAKE_INSTALL_PREFIX}/include/LinphoneApp/" COPYONLY)
+-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
++install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include" DESTINATION "${CMAKE_INSTALL_PREFIX}")
+ 
+ 
+ add_subdirectory(build)
+ add_subdirectory(cmake_builder/linphone_package)
+ 
+-deployqt_hack(${TARGET_NAME} ${LINPHONE_QML_DIR})
++#deployqt_hack(${TARGET_NAME} ${LINPHONE_QML_DIR})
+ 
+ 
+ # ------------------------------------------------------------------------------
+
