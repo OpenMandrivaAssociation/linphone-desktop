@@ -57,6 +57,7 @@ BuildRequires:	ninja
 BuildRequires:	pkgconfig(bctoolbox)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(speech-dispatcher)
+BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	qmake5
 
 Requires:	belcard
