@@ -8,7 +8,7 @@
 +#set(CMAKE_INSTALL_PREFIX "${APPLICATION_OUTPUT_DIR}")
  
  if( APPLE )
- 	set(LINPHONESDK_BUILD_TYPE "Default")#Using Mac will remove all SDK targets.
+ 	set(LINPHONEAPP_MACOS_ARCHS "x86_64" CACHE STRING "MacOS architectures to build: comma-separated list of values in [arm64, x86_64]")
 --- a/linphone-app/CMakeLists.txt
 +++ b/linphone-app/CMakeLists.txt
 @@ -728,6 +730,7 @@ include_directories("${LINPHONE_OUTPUT_DIR}/include/OpenGL")

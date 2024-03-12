@@ -20,7 +20,7 @@ Source10:	https://gitlab.linphone.org/BC/public/external/ispell/-/archive/%{comm
 Patch0:		linphone-desktop-5.2.1-cmake_dont_use_git.patch
 Patch1:		linphone-desktop-5.2.1-use_system_rootca.patch
 Patch2:		linphone-desktop-5.2.1-cmake_external_libs.patch
-Patch3:		linphone-desktop-5.2.1-cmake_fix_path.patch
+Patch3:		linphone-desktop-5.2.2-cmake_fix_path.patch
 Patch4:		linphone-desktop-5.2.1-bundle_ispell.patch
 Patch5:		linphone-desktop-5.2.1-disable_spec.patch
 
