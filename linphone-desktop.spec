@@ -8,7 +8,7 @@
 %global commit_external_ispell	05574fe160222c3d0b6283c1433c9b087271fad1
 
 Name:		linphone-desktop
-Version:	5.2.4
+Version:	5.2.6
 Release:	1
 Summary:	Voice over IP Application
 License:	GPLv3+
