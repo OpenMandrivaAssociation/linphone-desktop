@@ -1,15 +1,16 @@
-%bcond_with		ffmpeg
-%bcond_with		ldap
-%bcond_without	oauth2
-%bcond_with		static
-%bcond_without	strict
-%bcond_with		tests
+%bcond ffmpeg			0
+%bcond ldap			0
+%bcond oauth2			1
+%bcond pdf_viewer		1
+%bcond strict			1
+%bcond unit_tests		1
+%bcond unit_tests_install	1
 
 %global commit_external_ispell	05574fe160222c3d0b6283c1433c9b087271fad1
 
 Name:		linphone-desktop
 Version:	5.2.6
-Release:	1
+Release:	2
 Summary:	Voice over IP Application
 License:	GPLv3+
 Group:		Communications
@@ -23,8 +24,6 @@ Patch2:		linphone-desktop-5.2.1-cmake_external_libs.patch
 Patch3:		linphone-desktop-5.2.2-cmake_fix_path.patch
 Patch4:		linphone-desktop-5.2.1-bundle_ispell.patch
 Patch5:		linphone-desktop-5.2.1-disable_spec.patch
-
-
 
 BuildRequires:	cmake
 BuildRequires:	cmake(belcard)
@@ -113,7 +112,6 @@ sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
 
 %build
 %cmake -Wno-dev \
-	-DENABLE_STATIC:BOOL=%{?with_static:ON}%{?!with_static:OFF} \
 	-DENABLE_STRICT:BOOL=%{?with_strict:ON}%{?!with_strict:OFF} \
 	-DCMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT:BOOL=OFF \
 	-DCMAKE_PREFIX_PATH:PATH=%{_prefix} \
@@ -121,6 +119,7 @@ sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
 	-DLINPHONE_QT_ONLY:BOOL=ON \
 	-DENABLE_APP_OAUTH2:BOOL=%{?with_oauth2:ON}%{?!with_oauth2:OFF} \
 	-DENABLE_APP_PACKAGE_ROOTCA:BOOL=OFF \
+	-DENABLE_APP_PDF_VIEWER:BOOL=L=%{?with_oauth2:ON}%{?!with_o:OFF} \
 	-DENABLE_BUILD_VERBOSE:BOOL=OFF \
 	-DENABLE_CONSOLE_UI:BOOL=ON \
 	-DENABLE_FFMPEG:BOOL=%{?with_ffmpeg:ON}%{?!with_ffmpeg:OFF} \
@@ -129,6 +128,7 @@ sed -i -e 's|set(APP_DEPENDS sdk)|#set(APP_DEPENDS sdk)|' CMakeLists.txt
 	-DENABLE_OPENH264:BOOL=OFF \
 	-DENABLE_QT_KEYCHAIN:BOOL=OFF \
 	-DENABLE_VIDEO:BOOL=ON \
+	-DENABLE_UNIT_TESTS:BOOL=%{?with_unit_tests:ON}%{?!with_unit_tests:OFF} \
 	-DENABLE_UPDATE_CHECK:BOOL=OFF \
 	-G Ninja
 
