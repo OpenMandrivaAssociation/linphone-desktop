@@ -10,7 +10,7 @@
 
 Name:		linphone-desktop
 Version:	5.2.6
-Release:	2
+Release:	3
 Summary:	Voice over IP Application
 License:	GPLv3+
 Group:		Communications
