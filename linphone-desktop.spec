@@ -18,13 +18,6 @@ URL:		https://www.linphone.org
 Source0: 	https://gitlab.linphone.org/BC/public/%{name}/-/archive/%{version}/%{name}-%{version}.tar.gz	
 Source10:	https://gitlab.linphone.org/BC/public/external/ispell/-/archive/%{commit_external_ispell}/ispell-%{commit_external_ispell}.tar.bz2
 
-Patch0:		linphone-desktop-5.2.1-cmake_dont_use_git.patch
-Patch1:		linphone-desktop-5.2.1-use_system_rootca.patch
-Patch2:		linphone-desktop-5.2.1-cmake_external_libs.patch
-Patch3:		linphone-desktop-5.2.2-cmake_fix_path.patch
-Patch4:		linphone-desktop-5.2.1-bundle_ispell.patch
-Patch5:		linphone-desktop-5.2.1-disable_spec.patch
-
 BuildRequires:	cmake
 BuildRequires:	cmake(belcard)
 BuildRequires:	cmake(belr)
@@ -73,6 +66,15 @@ Suggests:	x265
 
 Provides:	linphone = %{version}-%{release}
 Provides:	bundled(ispell) = 3.4.05
+
+
+%patchlist
+linphone-desktop-5.2.1-cmake_dont_use_git.patch
+linphone-desktop-5.2.1-use_system_rootca.patch
+linphone-desktop-5.2.1-cmake_external_libs.patch
+linphone-desktop-5.2.2-cmake_fix_path.patch
+linphone-desktop-5.2.1-bundle_ispell.patch
+linphone-desktop-5.2.1-disable_spec.patch
 
 %description
 Linphone is a free VoIP and video softphone based on the SIP protocol.
